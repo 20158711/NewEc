@@ -17,7 +17,7 @@ public final class Yanbi {
     }
 
     //获取配置
-    private static HashMap<Object,Object> getConfigurations(){
+    public static HashMap<Object,Object> getConfigurations(){
         return Configurator.getInstance().getYanbiConfigs();
     }
 
