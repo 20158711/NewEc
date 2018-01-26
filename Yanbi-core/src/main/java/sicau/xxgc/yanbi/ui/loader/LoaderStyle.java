@@ -1,4 +1,4 @@
-package sicau.xxgc.yanbi.ui;
+package sicau.xxgc.yanbi.ui.loader;
 
 /**
  * Created by yanbi on 2018/1/25.

@@ -1,4 +1,4 @@
-package sicau.xxgc.yanbi.ui;
+package sicau.xxgc.yanbi.ui.loader;
 
 import android.content.Context;
 

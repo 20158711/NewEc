@@ -2,6 +2,7 @@ package sicau.xxgc.newfastec;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,6 +17,8 @@ import sicau.xxgc.yanbi.net.callback.ISuccess;
  */
 
 public class ExampleDelegate extends YanbiDelegate {
+
+    private static final String TAG="#############";
     @Override
     public Object setLayout() {
         return R.layout.delegate_example;
@@ -27,17 +30,17 @@ public class ExampleDelegate extends YanbiDelegate {
     }
     private void testRestClient(){
         RestClient.builder()
-                .url("http://www.baidu.com")
+                .url("http://127.0.0.1/index")
                 .loader(getContext())
-                .params("","")
                 .success((String response)->{
-//                    Toast.makeText(_mActivity, response, Toast.LENGTH_LONG).show();
+                    Log.d(TAG, response);
+                    Toast.makeText(_mActivity, response, Toast.LENGTH_SHORT).show();
                 })
                 .failure(()->{
-
+                    Log.d(TAG, "testRestClient: failure");
                 })
                 .error((int code, String msg)-> {
-
+                    Log.d(TAG, "testRestClient: error");
                 })
                 .build()
                 .get();

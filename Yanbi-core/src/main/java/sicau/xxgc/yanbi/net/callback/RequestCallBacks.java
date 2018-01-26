@@ -5,8 +5,8 @@ import android.os.Handler;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import sicau.xxgc.yanbi.ui.LoaderStyle;
-import sicau.xxgc.yanbi.ui.YanbiLoader;
+import sicau.xxgc.yanbi.ui.loader.LoaderStyle;
+import sicau.xxgc.yanbi.ui.loader.YanbiLoader;
 
 /**
  * Created by yanbi on 2018/1/25.

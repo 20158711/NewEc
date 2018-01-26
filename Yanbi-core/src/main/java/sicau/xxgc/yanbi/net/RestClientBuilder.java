@@ -2,7 +2,7 @@ package sicau.xxgc.yanbi.net;
 
 import android.content.Context;
 
-import java.util.Map;
+import java.io.File;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
@@ -11,7 +11,7 @@ import sicau.xxgc.yanbi.net.callback.IError;
 import sicau.xxgc.yanbi.net.callback.IFailure;
 import sicau.xxgc.yanbi.net.callback.IRequest;
 import sicau.xxgc.yanbi.net.callback.ISuccess;
-import sicau.xxgc.yanbi.ui.LoaderStyle;
+import sicau.xxgc.yanbi.ui.loader.LoaderStyle;
 
 /**
  * Created by yanbi on 2018/1/24.
@@ -27,6 +27,11 @@ public class RestClientBuilder {
     private RequestBody mBody=null;
     private Context mContext=null;
     private LoaderStyle mLoaderStyle=null;
+    private File mFile=null;
+
+    private String mDownloadDir=null;
+    private String mExtension=null;
+    private String mName=null;
     RestClientBuilder(){}
     public final RestClientBuilder url(String url){
         this.mUrl=url;
@@ -40,6 +45,35 @@ public class RestClientBuilder {
         PARAMS.put(key,value);
         return this;
     }
+    public final RestClientBuilder file(File file){
+        this.mFile=file;
+        return this;
+    }
+    public final RestClientBuilder file(String file){
+        this.mFile=new File(file);
+        return this;
+    }
+
+    public final RestClientBuilder name(String name){
+        this.mName=name;
+        return this;
+    }
+
+    public final RestClientBuilder dir(String dir) {
+        this.mDownloadDir = dir;
+        return this;
+    }
+
+    public final RestClientBuilder extension(String extension) {
+        this.mExtension = extension;
+        return this;
+    }
+
+    public final RestClientBuilder raw(String raw) {
+        this.mBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), raw);
+        return this;
+    }
+
     public final RestClientBuilder success(String raw) {
         this.mBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"), raw);
         return this;
@@ -72,7 +106,7 @@ public class RestClientBuilder {
     }
 
     public final RestClient build(){
-        return new RestClient(mUrl,PARAMS,mIRequest,mISuccess,mIFailure,mIError,mBody,mContext,mLoaderStyle);
+        return new RestClient(mUrl,PARAMS,mIRequest,mDownloadDir,mExtension,mName,mISuccess,mIFailure,mIError,mBody,mFile,mContext,mLoaderStyle);
     }
 
 }

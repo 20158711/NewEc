@@ -12,7 +12,7 @@ import sicau.xxgc.yanbi.app.Yanbi;
 public class DimenUtil {
 
     public static DisplayMetrics getDm(){
-        final Resources resources= Yanbi.getApplication().getResources();
+        final Resources resources= Yanbi.getApplicationContext().getResources();
         final DisplayMetrics dm=resources.getDisplayMetrics();
         return dm;
     }
