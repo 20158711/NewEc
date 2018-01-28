@@ -1,18 +1,22 @@
 package sicau.xxgc.yanbi.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
-import android.widget.Toast;
 
 import java.text.MessageFormat;
 import java.util.Timer;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import sicau.xxgc.yanbi.app.AccountManager;
+import sicau.xxgc.yanbi.app.IUserChecker;
 import sicau.xxgc.yanbi.delegates.YanbiDelegate;
 import sicau.xxgc.yanbi.ec.R2;
+import sicau.xxgc.yanbi.ui.launcher.ILauncherListener;
+import sicau.xxgc.yanbi.ui.launcher.OnLauncherFinishTag;
 import sicau.xxgc.yanbi.ui.launcher.ScrollLauncherTag;
 import sicau.xxgc.yanbi.util.storage.YanbiPreference;
 import sicau.xxgc.yanbi.util.timer.BaseTimerTask;
@@ -28,6 +32,7 @@ public class LauncherDelegate extends YanbiDelegate implements ITimerListener{
     AppCompatTextView mTvTimer=null;
     private Timer mTimer=null;
     private int mCount=5;
+    private ILauncherListener mILauncherListener=null;
 
     @Override
     public Object setLayout() {
@@ -44,9 +49,21 @@ public class LauncherDelegate extends YanbiDelegate implements ITimerListener{
         if (!YanbiPreference.getAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name())){
             start(new LauncherScrollDelegate(),SINGLETASK);
         }else {
-            //TODO
-            //检查登录
-            Toast.makeText(_mActivity, "check login", Toast.LENGTH_SHORT).show();
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.SIGNED);
+                    }
+                }
+
+                @Override
+                public void onNotSignIn() {
+                    if (mILauncherListener != null) {
+                        mILauncherListener.onLauncherFinish(OnLauncherFinishTag.NOT_SIGNED);
+                    }
+                }
+            });
         }
     }
 
@@ -64,6 +81,14 @@ public class LauncherDelegate extends YanbiDelegate implements ITimerListener{
                 }
             }
         });
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener){
+            mILauncherListener= (ILauncherListener) activity;
+        }
     }
 
     @OnClick(R2.id.tv_launcher_timer)

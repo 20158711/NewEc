@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 26
@@ -33,4 +34,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':Yanbi-core')
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+
 }

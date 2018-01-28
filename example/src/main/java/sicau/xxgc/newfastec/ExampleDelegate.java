@@ -26,8 +26,9 @@ public class ExampleDelegate extends YanbiDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        testRestClient();
+//        testRestClient();
     }
+
     private void testRestClient(){
         RestClient.builder()
                 .url("http://127.0.0.1/index")
