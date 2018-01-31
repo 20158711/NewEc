@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import me.yokeyword.fragmentation.SupportActivityDelegate;
 import sicau.xxgc.yanbi.activities.ProxyActivity;
+import sicau.xxgc.yanbi.app.Yanbi;
 import sicau.xxgc.yanbi.delegates.YanbiDelegate;
 import sicau.xxgc.yanbi.launcher.LauncherDelegate;
 import sicau.xxgc.yanbi.sign.ISignListener;
@@ -26,6 +27,7 @@ public class ExampleActivity extends ProxyActivity implements
         if (actionBar != null) {
             actionBar.hide();
         }
+        Yanbi.getConfigurator().withActivity(this);
     }
 
     @Override

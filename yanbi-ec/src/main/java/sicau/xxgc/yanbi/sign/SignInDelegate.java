@@ -16,6 +16,7 @@ import sicau.xxgc.yanbi.ec.R;
 import sicau.xxgc.yanbi.ec.R2;
 import sicau.xxgc.yanbi.enums.RequestPath;
 import sicau.xxgc.yanbi.net.RestClient;
+import sicau.xxgc.yanbi.wxchat.YanbiWeChat;
 
 /**
  * Created by yanbi on 2018/1/27.
@@ -58,8 +59,9 @@ public class SignInDelegate extends YanbiDelegate {
 
     @OnClick(R2.id.icon_sign_in_wechat)
     void onClickWeChat(){
-        //TODO
-        //微信登录
+        YanbiWeChat.getInstance().onSignSuccess((String userInfo)->{
+
+        }).signIn();
     }
 
     @OnClick(R2.id.tv_link_sign_up)

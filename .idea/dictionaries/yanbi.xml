@@ -2,8 +2,10 @@
   <dictionary name="yanbi">
     <words>
       <w>iconfont</w>
+      <w>newfastec</w>
       <w>wechat</w>
       <w>weixin</w>
+      <w>wxapi</w>
     </words>
   </dictionary>
 </component>
